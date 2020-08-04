@@ -37,7 +37,9 @@
 					
 						<tr>
 							<td><c:out value="${board.bno}" /></td>
-							<td><c:out value="${board.title}" /></td>
+							<!-- a속성에 target='_blank'를 지정하면 새창뜸 -->
+							<td><a href='/board/get?bno=<c:out value="${board.bno}"/>'>
+							<c:out value="${board.title}"/></a></td>
 							<td><c:out value="${board.writer}" /></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd"
 							value="${board.regDate}"/></td>
@@ -80,8 +82,10 @@ $(document).ready(function() {
 	
 	checkModal(result);
 	
+	history.replaceState({}, null, null);
+	
 	function checkModal(result) {
-		if(result === '') {
+		if(result === '' || history.state) {
 			return;
 		}
 		
